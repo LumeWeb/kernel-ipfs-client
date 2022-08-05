@@ -33,39 +33,37 @@ export async function refreshGatewayList() {
 export async function fetchIpfs(
   hash: string,
   path = "",
-  headers = {},
   receiveUpdate: DataFn
 ) {
   if (!ipfsPath(`/ipfs/{${hash}`)) {
     throw new Error("Invalid hash");
   }
-  return doFetch("fetchIpfs", { hash, path, headers }, receiveUpdate);
+  return doFetch("fetchIpfs", { hash, path }, receiveUpdate);
 }
 
-export async function statIpfs(hash: string, path = "", headers = {}) {
+export async function statIpfs(hash: string, path = "") {
   if (!ipfsPath(`/ipfs/{${hash}`)) {
     throw new Error("Invalid hash");
   }
-  return doFetch("statIpfs", { hash, path, headers });
+  return doFetch("statIpfs", { hash, path });
 }
 
 export async function fetchIpns(
   hash: string,
   path = "",
-  headers = {},
   receiveUpdate: DataFn
 ) {
   if (!ipnsPath(`/ipns/{${hash}`)) {
     throw new Error("Invalid hash");
   }
-  return doFetch("fetchIpns", { hash, path, headers }, receiveUpdate);
+  return doFetch("fetchIpns", { hash, path }, receiveUpdate);
 }
 
-export async function statIpns(hash: string, path = "", headers = {}) {
+export async function statIpns(hash: string, path = "") {
   if (!ipnsPath(`/ipns/{${hash}`)) {
     throw new Error("Invalid hash");
   }
-  return doFetch("statIpns", { hash, path, headers });
+  return doFetch("statIpns", { hash, path });
 }
 
 async function doFetch(method: string, data: any, receiveUpdate?: DataFn) {
