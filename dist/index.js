@@ -24,13 +24,13 @@ export async function refreshGatewayList() {
     return resp;
 }
 export async function fetchIpfs(hash, path = "", receiveUpdate) {
-    if (!ipfsPath(`/ipfs/{${hash}`)) {
+    if (!ipfsPath(`/ipfs/${hash}`)) {
         throw new Error("Invalid hash");
     }
     return doFetch("fetchIpfs", { hash, path }, receiveUpdate);
 }
 export async function statIpfs(hash, path = "") {
-    if (!ipfsPath(`/ipfs/{${hash}`)) {
+    if (!ipfsPath(`/ipfs/${hash}`)) {
         throw new Error("Invalid hash");
     }
     return doFetch("statIpfs", { hash, path });
