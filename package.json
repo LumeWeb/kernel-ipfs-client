@@ -1,0 +1,16 @@
+{
+    "name": "@lumeweb/kernel-ipfs-client",
+    "version": "0.1.0",
+    "type": "module",
+    "main": "dist/index.js",
+    "dependencies": {
+        "is-ipfs": "^6.0.2",
+        "libkernel": "^0.1.43",
+        "libkmodule": "^0.2.44"
+    },
+    "devDependencies": {
+        "@types/node": "^18.0.6",
+        "libskynet": "^0.0.62",
+        "prettier": "^2.7.1"
+    }
+}
