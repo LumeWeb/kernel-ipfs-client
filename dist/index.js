@@ -1,66 +1,48 @@
-import { ipnsPath, ipfsPath } from "is-ipfs";
-const IPFS_MODULE = "AQDr2iGYEiMKIdb14w7dxwxFYBo3LaYc0mAuRKXsF2w9OQ";
-let callModule, connectModule;
-async function loadLibs() {
-    if (callModule && connectModule) {
-        return;
+import { Client, factory } from "@lumeweb/libkernel-universal";
+import defer from "p-defer";
+export class IPFSClient extends Client {
+    async ready() {
+        return this.callModuleReturn("ready");
     }
-    if (typeof window !== "undefined" && window?.document) {
-        const pkg = await import("libkernel");
-        callModule = pkg.callModule;
-        connectModule = pkg.connectModule;
+    async stat(cid) {
+        return this.callModuleReturn("stat");
     }
-    else {
-        const pkg = await import("libkmodule");
-        callModule = pkg.callModule;
-        connectModule = pkg.connectModule;
+    ls(cid) {
+        return this.connectModuleGenerator("ls", { cid });
+    }
+    cat(cid) {
+        return this.connectModuleGenerator("cat", { cid });
+    }
+    async ipns(cid) {
+        return this.callModuleReturn("ipnsResolve");
+    }
+    async activePeers() {
+        return this.callModuleReturn("getActivePeers");
+    }
+    connectModuleGenerator(method, data) {
+        const pipe = defer();
+        let done = false;
+        const [update, result] = this.connectModule(method, data, (item) => {
+            pipe.resolve(item);
+        });
+        (async () => {
+            const ret = await result;
+            done = true;
+            this.handleError(ret);
+        })();
+        return {
+            abort() {
+                update();
+            },
+            // @ts-ignore
+            iterable: async function* () {
+                // @ts-ignore
+                const iterator = (await pipe.promise)[Symbol.asyncIterator]();
+                for await (const value of iterator) {
+                    yield value;
+                }
+            },
+        };
     }
 }
-export async function refreshGatewayList() {
-    const [resp, err] = await doCall("refreshGatewayList");
-    if (err) {
-        throw new Error(err);
-    }
-    return resp;
-}
-export async function fetchIpfs(hash, path = "", receiveUpdate) {
-    if (!ipfsPath(`/ipfs/${hash}`)) {
-        throw new Error("Invalid hash");
-    }
-    return doFetch("fetchIpfs", { hash, path }, receiveUpdate);
-}
-export async function statIpfs(hash, path = "") {
-    if (!ipfsPath(`/ipfs/${hash}`)) {
-        throw new Error("Invalid hash");
-    }
-    return doFetch("statIpfs", { hash, path });
-}
-export async function fetchIpns(hash, path = "", receiveUpdate) {
-    if (!ipnsPath(`/ipns/{${hash}`)) {
-        throw new Error("Invalid hash");
-    }
-    return doFetch("fetchIpns", { hash, path }, receiveUpdate);
-}
-export async function statIpns(hash, path = "") {
-    if (!ipnsPath(`/ipns/{${hash}`)) {
-        throw new Error("Invalid hash");
-    }
-    return doFetch("statIpns", { hash, path });
-}
-async function doFetch(method, data, receiveUpdate) {
-    let [resp, err] = await doCall(method, data, receiveUpdate);
-    if (typeof err?.then === "function") {
-        [resp, err] = await err;
-    }
-    if (err) {
-        throw new Error(err);
-    }
-    return resp;
-}
-async function doCall(method, data, receiveUpdate) {
-    await loadLibs();
-    if (receiveUpdate) {
-        return connectModule(IPFS_MODULE, method, data, receiveUpdate);
-    }
-    return callModule(IPFS_MODULE, method, data);
-}
+export const createClient = factory(IPFSClient, "_AkimjN5qo5cYklxdBNszsxh6VXgypNZVq4zk_BIS3s76A");

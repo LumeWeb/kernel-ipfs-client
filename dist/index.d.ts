@@ -1,7 +1,17 @@
-import type { DataFn } from "libskynet";
-export declare function refreshGatewayList(): Promise<any>;
-export declare function fetchIpfs(hash: string, path: string | undefined, receiveUpdate: DataFn): Promise<any>;
-export declare function statIpfs(hash: string, path?: string): Promise<any>;
-export declare function fetchIpns(hash: string, path: string | undefined, receiveUpdate: DataFn): Promise<any>;
-export declare function statIpns(hash: string, path?: string): Promise<any>;
+import { Client } from "@lumeweb/libkernel-universal";
+interface AbortableGenerator {
+    abort: () => void;
+    iterable: AsyncGenerator<object>;
+}
+export declare class IPFSClient extends Client {
+    ready(): Promise<any>;
+    stat(cid: string): Promise<any>;
+    ls(cid: string): AbortableGenerator;
+    cat(cid: string): AbortableGenerator;
+    ipns(cid: string): Promise<string>;
+    activePeers(): Promise<number>;
+    private connectModuleGenerator;
+}
+export declare const createClient: (...args: any) => IPFSClient;
+export {};
 //# sourceMappingURL=index.d.ts.map
