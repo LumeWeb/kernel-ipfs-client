@@ -4,13 +4,14 @@
     "type": "module",
     "main": "dist/index.js",
     "dependencies": {
-        "is-ipfs": "^6.0.2",
+        "@lumeweb/libkernel-universal": "git+https://git.lumeweb.com/LumeWeb/libkernel-universal.git",
         "libkernel": "^0.1.43",
-        "libkmodule": "^0.2.44"
+        "libkmodule": "^0.2.44",
+        "p-defer": "^4.0.0"
     },
     "devDependencies": {
         "@types/node": "^18.0.6",
-        "libskynet": "^0.0.62",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "typescript": "^5.0.3"
     }
 }
