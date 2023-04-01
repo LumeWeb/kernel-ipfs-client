@@ -4,14 +4,14 @@ export class IPFSClient extends Client {
     async ready() {
         return this.callModuleReturn("ready");
     }
-    async stat(cid) {
-        return this.callModuleReturn("stat");
+    async stat(cid, options) {
+        return this.callModuleReturn("stat", { options });
     }
-    ls(cid) {
-        return this.connectModuleGenerator("ls", { cid });
+    ls(cid, options) {
+        return this.connectModuleGenerator("ls", { cid, options });
     }
-    cat(cid) {
-        return this.connectModuleGenerator("cat", { cid });
+    cat(cid, options) {
+        return this.connectModuleGenerator("cat", { cid, options });
     }
     async ipns(cid) {
         return this.callModuleReturn("ipnsResolve");

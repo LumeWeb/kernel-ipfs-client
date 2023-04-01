@@ -1,13 +1,14 @@
 import { Client } from "@lumeweb/libkernel-universal";
+import { CatOptions, LsOptions, StatOptions } from "@helia/unixfs";
 interface AbortableGenerator {
     abort: () => void;
     iterable: AsyncGenerator<object>;
 }
 export declare class IPFSClient extends Client {
     ready(): Promise<any>;
-    stat(cid: string): Promise<any>;
-    ls(cid: string): AbortableGenerator;
-    cat(cid: string): AbortableGenerator;
+    stat(cid: string, options?: Partial<StatOptions>): Promise<any>;
+    ls(cid: string, options?: Partial<LsOptions>): AbortableGenerator;
+    cat(cid: string, options?: Partial<CatOptions>): AbortableGenerator;
     ipns(cid: string): Promise<string>;
     activePeers(): Promise<number>;
     private connectModuleGenerator;
