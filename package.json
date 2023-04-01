@@ -10,6 +10,7 @@
         "p-defer": "^4.0.0"
     },
     "devDependencies": {
+        "@helia/unixfs": "^1.2.1",
         "@types/node": "^18.0.6",
         "prettier": "^2.7.1",
         "typescript": "^5.0.3"

@@ -1,5 +1,6 @@
 import { Client, factory } from "@lumeweb/libkernel-universal";
 import defer from "p-defer";
+import { CatOptions, LsOptions, StatOptions } from "@helia/unixfs";
 
 interface AbortableGenerator {
   abort: () => void;
@@ -11,16 +12,16 @@ export class IPFSClient extends Client {
     return this.callModuleReturn("ready");
   }
 
-  public async stat(cid: string) {
-    return this.callModuleReturn("stat");
+  public async stat(cid: string, options?: Partial<StatOptions>) {
+    return this.callModuleReturn("stat", { options });
   }
 
-  public ls(cid: string): AbortableGenerator {
-    return this.connectModuleGenerator("ls", { cid });
+  public ls(cid: string, options?: Partial<LsOptions>): AbortableGenerator {
+    return this.connectModuleGenerator("ls", { cid, options });
   }
 
-  public cat(cid: string): AbortableGenerator {
-    return this.connectModuleGenerator("cat", { cid });
+  public cat(cid: string, options?: Partial<CatOptions>): AbortableGenerator {
+    return this.connectModuleGenerator("cat", { cid, options });
   }
 
   public async ipns(cid: string): Promise<string> {
