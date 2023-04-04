@@ -68,5 +68,5 @@ export class IPFSClient extends Client {
 
 export const createClient = factory<IPFSClient>(
   IPFSClient,
-  "AADLLkMvvdm4F1syYGEXB2HsR6QKFqvtwltHSEKldZ3-2Q"
+  "AAChdANbL0wYGNUJsH7zfa6tCSnhGQItgCeGf-KJlw2Pew"
 );
