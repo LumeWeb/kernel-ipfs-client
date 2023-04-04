@@ -45,4 +45,4 @@ export class IPFSClient extends Client {
         };
     }
 }
-export const createClient = factory(IPFSClient, "_B2ft0PHA2Kz75uUJe2_0_lVaDI5Y-fgEhCqvI0RBBYBvw");
+export const createClient = factory(IPFSClient, "AABspp2cAyOVG2ows3KA6J9-frjdfOmyvGR8Wc0nELi4eA");
