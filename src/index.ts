@@ -25,7 +25,7 @@ export class IPFSClient extends Client {
   }
 
   public async ipns(cid: string): Promise<string> {
-    return this.callModuleReturn("ipnsResolve");
+    return this.callModuleReturn("ipnsResolve", { cid });
   }
 
   public async activePeers(): Promise<number> {
