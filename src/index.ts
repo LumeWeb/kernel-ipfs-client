@@ -67,7 +67,7 @@ export class IPFSClient extends Client {
 
                 return {
                   value: chunk,
-                  done: true as const,
+                  done,
                 };
               },
             };
