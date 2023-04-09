@@ -20,7 +20,7 @@ export class IPFSClient extends Client {
         return this.callModuleReturn("getActivePeers");
     }
     connectModuleGenerator(method, data) {
-        const pipe = defer();
+        let pipe = defer();
         let done = false;
         const [update, result] = this.connectModule(method, data, (item) => {
             pipe.resolve(item);
@@ -32,15 +32,24 @@ export class IPFSClient extends Client {
         })();
         return {
             abort() {
-                update();
+                update("abort");
             },
-            // @ts-ignore
-            iterable: async function* () {
-                // @ts-ignore
-                const iterator = (await pipe.promise)[Symbol.asyncIterator]();
-                for await (const value of iterator) {
-                    yield value;
-                }
+            iterable() {
+                return {
+                    [Symbol.asyncIterator]() {
+                        return {
+                            async next() {
+                                const chunk = await pipe.promise;
+                                update("next");
+                                pipe = defer();
+                                return {
+                                    value: chunk,
+                                    done: true,
+                                };
+                            },
+                        };
+                    },
+                };
             },
         };
     }

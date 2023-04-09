@@ -2,7 +2,7 @@ import { Client } from "@lumeweb/libkernel-universal";
 import { CatOptions, LsOptions, StatOptions } from "@helia/unixfs";
 interface AbortableGenerator {
     abort: () => void;
-    iterable: AsyncGenerator<object>;
+    iterable: () => AsyncIterable<Uint8Array>;
 }
 export declare class IPFSClient extends Client {
     ready(): Promise<any>;
