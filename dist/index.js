@@ -5,7 +5,7 @@ export class IPFSClient extends Client {
         return this.callModuleReturn("ready");
     }
     async stat(cid, options) {
-        return this.callModuleReturn("stat", { options });
+        return this.callModuleReturn("stat", { cid, options });
     }
     ls(cid, options) {
         return this.connectModuleGenerator("ls", { cid, options });
