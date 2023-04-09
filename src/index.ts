@@ -13,7 +13,7 @@ export class IPFSClient extends Client {
   }
 
   public async stat(cid: string, options?: Partial<StatOptions>) {
-    return this.callModuleReturn("stat", { options });
+    return this.callModuleReturn("stat", { cid, options });
   }
 
   public ls(cid: string, options?: Partial<LsOptions>): AbortableGenerator {
