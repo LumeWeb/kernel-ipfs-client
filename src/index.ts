@@ -4,7 +4,7 @@ import { CatOptions, LsOptions, StatOptions } from "@helia/unixfs";
 
 interface AbortableGenerator {
   abort: () => void;
-  iterable: AsyncGenerator<object>;
+  iterable: () => AsyncIterable<Uint8Array>;
 }
 
 export class IPFSClient extends Client {
@@ -36,7 +36,7 @@ export class IPFSClient extends Client {
     method: string,
     data: any
   ): AbortableGenerator {
-    const pipe = defer();
+    let pipe = defer<Uint8Array>();
 
     let done = false;
 
@@ -52,15 +52,27 @@ export class IPFSClient extends Client {
 
     return {
       abort() {
-        update();
+        update("abort");
       },
-      // @ts-ignore
-      iterable: async function* (): AsyncGenerator<object> {
-        // @ts-ignore
-        const iterator = (await pipe.promise)[Symbol.asyncIterator]();
-        for await (const value of iterator) {
-          yield value as object;
-        }
+
+      iterable(): AsyncIterable<Uint8Array> {
+        return {
+          [Symbol.asyncIterator]() {
+            return {
+              async next(): Promise<IteratorResult<Uint8Array>> {
+                const chunk = await pipe.promise;
+                update("next");
+
+                pipe = defer();
+
+                return {
+                  value: chunk,
+                  done: true as const,
+                };
+              },
+            };
+          },
+        };
       },
     };
   }
