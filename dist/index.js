@@ -14,7 +14,7 @@ export class IPFSClient extends Client {
         return this.connectModuleGenerator("cat", { cid, options });
     }
     async ipns(cid) {
-        return this.callModuleReturn("ipnsResolve");
+        return this.callModuleReturn("ipnsResolve", { cid });
     }
     async activePeers() {
         return this.callModuleReturn("getActivePeers");
