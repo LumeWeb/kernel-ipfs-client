@@ -44,7 +44,7 @@ export class IPFSClient extends Client {
                                 pipe = defer();
                                 return {
                                     value: chunk,
-                                    done: true,
+                                    done,
                                 };
                             },
                         };
@@ -54,4 +54,4 @@ export class IPFSClient extends Client {
         };
     }
 }
-export const createClient = factory(IPFSClient, "AAADHtX7m4wC7kFA8wMqFzowlgweBG1FgQjGTabVOMRqBA");
+export const createClient = factory(IPFSClient, "AABQIM9nyK61LFfr5jUAivD6JYRvQsC5XSNE71XXHfn-sg");
