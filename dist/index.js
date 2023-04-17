@@ -21,14 +21,13 @@ export class IPFSClient extends Client {
     }
     connectModuleGenerator(method, data) {
         let pipe = defer();
-        let done = false;
         const [update, result] = this.connectModule(method, data, (item) => {
             pipe.resolve(item);
         });
         (async () => {
             const ret = await result;
-            done = true;
             this.handleError(ret);
+            pipe.resolve(undefined);
         })();
         return {
             abort() {
@@ -39,18 +38,18 @@ export class IPFSClient extends Client {
                     [Symbol.asyncIterator]() {
                         return {
                             async next() {
-                                if (done) {
+                                const chunk = await pipe.promise;
+                                if (chunk === undefined) {
                                     return {
-                                        value: undefined,
-                                        done,
+                                        value: new Uint8Array(),
+                                        done: true,
                                     };
                                 }
-                                const chunk = await pipe.promise;
                                 update("next");
                                 pipe = defer();
                                 return {
                                     value: chunk,
-                                    done,
+                                    done: false,
                                 };
                             },
                         };
