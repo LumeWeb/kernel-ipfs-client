@@ -60,6 +60,13 @@ export class IPFSClient extends Client {
           [Symbol.asyncIterator]() {
             return {
               async next(): Promise<IteratorResult<Uint8Array>> {
+                if (done) {
+                  return {
+                    value: undefined,
+                    done,
+                  };
+                }
+
                 const chunk = await pipe.promise;
                 update("next");
 
@@ -80,5 +87,5 @@ export class IPFSClient extends Client {
 
 export const createClient = factory<IPFSClient>(
   IPFSClient,
-  "AABQIM9nyK61LFfr5jUAivD6JYRvQsC5XSNE71XXHfn-sg"
+  "AAD_sKxIPbN-n7sNpYycq0M6wyix_UMIhqFiUPILfKiuqA"
 );
