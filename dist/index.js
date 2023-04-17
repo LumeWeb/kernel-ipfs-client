@@ -45,8 +45,8 @@ export class IPFSClient extends Client {
                                         done: true,
                                     };
                                 }
-                                update("next");
                                 pipe = defer();
+                                update("next");
                                 return {
                                     value: chunk,
                                     done: false,
