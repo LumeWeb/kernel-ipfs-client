@@ -39,6 +39,12 @@ export class IPFSClient extends Client {
                     [Symbol.asyncIterator]() {
                         return {
                             async next() {
+                                if (done) {
+                                    return {
+                                        value: undefined,
+                                        done,
+                                    };
+                                }
                                 const chunk = await pipe.promise;
                                 update("next");
                                 pipe = defer();
@@ -54,4 +60,4 @@ export class IPFSClient extends Client {
         };
     }
 }
-export const createClient = factory(IPFSClient, "AABQIM9nyK61LFfr5jUAivD6JYRvQsC5XSNE71XXHfn-sg");
+export const createClient = factory(IPFSClient, "AAD_sKxIPbN-n7sNpYycq0M6wyix_UMIhqFiUPILfKiuqA");
