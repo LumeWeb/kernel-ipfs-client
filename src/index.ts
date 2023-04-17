@@ -38,16 +38,14 @@ export class IPFSClient extends Client {
   ): AbortableGenerator {
     let pipe = defer<Uint8Array>();
 
-    let done = false;
-
     const [update, result] = this.connectModule(method, data, (item: any) => {
       pipe.resolve(item);
     });
 
     (async () => {
       const ret = await result;
-      done = true;
       this.handleError(ret);
+      pipe.resolve(undefined);
     })();
 
     return {
@@ -60,21 +58,21 @@ export class IPFSClient extends Client {
           [Symbol.asyncIterator]() {
             return {
               async next(): Promise<IteratorResult<Uint8Array>> {
-                if (done) {
+                const chunk = await pipe.promise;
+                if (chunk === undefined) {
                   return {
-                    value: undefined,
-                    done,
+                    value: new Uint8Array(),
+                    done: true,
                   };
                 }
 
-                const chunk = await pipe.promise;
                 update("next");
 
                 pipe = defer();
 
                 return {
                   value: chunk,
-                  done,
+                  done: false,
                 };
               },
             };
