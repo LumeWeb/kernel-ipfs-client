@@ -7,6 +7,9 @@ interface AbortableGenerator {
   iterable: () => AsyncIterable<Uint8Array>;
 }
 
+export const MODULE =
+  "zduTW8neeep7BcgyJyysyH5pSNPcLfS1EgTxVf3zncYbrJJQLxu9wjvzZM";
+
 export class IPFSClient extends Client {
   public async ready() {
     return this.callModuleReturn("ready");
@@ -83,7 +86,4 @@ export class IPFSClient extends Client {
   }
 }
 
-export const createClient = factory<IPFSClient>(
-  IPFSClient,
-  "AAA0F0m8xP2YVcP0YZ-1QT8nLqYPZjgANotOQO3nGST1Bg",
-);
+export const createClient = factory<IPFSClient>(IPFSClient, MODULE);
