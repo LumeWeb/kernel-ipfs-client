@@ -1,4 +1,4 @@
-import { Client, factory } from "@lumeweb/libkernel-universal";
+import { Client, factory } from "@lumeweb/libkernel/module";
 import defer from "p-defer";
 import { CatOptions, LsOptions, StatOptions } from "@helia/unixfs";
 
@@ -34,7 +34,7 @@ export class IPFSClient extends Client {
 
   private connectModuleGenerator(
     method: string,
-    data: any
+    data: any,
   ): AbortableGenerator {
     let pipe = defer<Uint8Array>();
 
@@ -85,5 +85,5 @@ export class IPFSClient extends Client {
 
 export const createClient = factory<IPFSClient>(
   IPFSClient,
-  "AAA0F0m8xP2YVcP0YZ-1QT8nLqYPZjgANotOQO3nGST1Bg"
+  "AAA0F0m8xP2YVcP0YZ-1QT8nLqYPZjgANotOQO3nGST1Bg",
 );
