@@ -20,7 +20,7 @@
         "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "@lumeweb/libkernel": "^0.1.0-develop.16",
+        "@lumeweb/libkernel": "^0.1.0-develop.20",
         "p-defer": "^4.0.0"
     },
     "files": [
