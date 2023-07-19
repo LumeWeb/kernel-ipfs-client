@@ -84,6 +84,10 @@ export class IPFSClient extends Client {
       },
     };
   }
+
+  public async register() {
+    return this.callModuleReturn("register");
+  }
 }
 
 export const createClient = factory<IPFSClient>(IPFSClient, MODULE);
