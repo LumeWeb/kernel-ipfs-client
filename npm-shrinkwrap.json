@@ -8,7 +8,7 @@
             "name": "@lumeweb/kernel-ipfs-client",
             "version": "0.1.0-develop.6",
             "dependencies": {
-                "@lumeweb/libkernel": "^0.1.0-develop.20",
+                "@lumeweb/libkernel": "^0.1.0-develop.27",
                 "p-defer": "^4.0.0"
             },
             "devDependencies": {
@@ -2037,12 +2037,13 @@
             }
         },
         "node_modules/@lumeweb/libkernel": {
-            "version": "0.1.0-develop.20",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.20.tgz",
-            "integrity": "sha512-z7yRk6B0P0bxPe+a4Xm5/Bl6eIfkDCB2IJhNK2Gm+o7j4RbWbizRk79+zgBFWMrYzo8bVrpBKK7nGI3iNOgT9g==",
+            "version": "0.1.0-develop.27",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.27.tgz",
+            "integrity": "sha512-XkO16wzr2k1j9CrraVrL5vm5ysY+wJGwfJf9/PAknpLGko8j8Z/TbO5h/Q43iNjYjLlwBL2cGngX8orCZBWVDA==",
             "dependencies": {
-                "@lumeweb/libweb": "0.2.0-develop.26",
-                "emittery": "^1.0.1"
+                "@lumeweb/libweb": "0.2.0-develop.27",
+                "emittery": "^1.0.1",
+                "p-defer": "^4.0.0"
             }
         },
         "node_modules/@lumeweb/libkernel/node_modules/emittery": {
@@ -2091,9 +2092,9 @@
             }
         },
         "node_modules/@lumeweb/libweb": {
-            "version": "0.2.0-develop.26",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.26.tgz",
-            "integrity": "sha512-XRIDiqRFqlEbcwjxAfkv7UYnyTflN3Q4rki8YAd9QrLQM2vycslgPLYS53vVJVL9GPH93V5J9z2V4DPQZlOOkQ==",
+            "version": "0.2.0-develop.27",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.27.tgz",
+            "integrity": "sha512-obS4a6mcHJNoWXy5fCDuGAIVMee0ivK8q/q0semqoS3v0PS7t7sUmRX5ajyCwGbACXYqEdq3vU7RwzxhUkuNGg==",
             "dependencies": {
                 "@lumeweb/community-portals": "^0.1.0-develop.6",
                 "@lumeweb/libportal": "^0.2.0-develop.16",

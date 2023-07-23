@@ -1,4 +1,4 @@
-import { Client, factory } from "@lumeweb/libkernel/module";
+import { Client, factory, NetworkClient } from "@lumeweb/libkernel/module";
 import defer from "p-defer";
 import { CatOptions, LsOptions, StatOptions } from "@helia/unixfs";
 
@@ -10,11 +10,7 @@ interface AbortableGenerator {
 export const MODULE =
   "zduTMEiWaceB5Zew41fZnC4MbJybZNWY3fZDYUXQMxbpg1C671Bv3gjES3";
 
-export class IPFSClient extends Client {
-  public async ready() {
-    return this.callModuleReturn("ready");
-  }
-
+export class IPFSClient extends NetworkClient {
   public async stat(cid: string, options?: Partial<StatOptions>) {
     return this.callModuleReturn("stat", { cid, options });
   }
@@ -83,10 +79,6 @@ export class IPFSClient extends Client {
         };
       },
     };
-  }
-
-  public async register() {
-    return this.callModuleReturn("register");
   }
 }
 
