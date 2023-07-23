@@ -8,7 +8,7 @@ interface AbortableGenerator {
 }
 
 export const MODULE =
-  "zduTMEiWaceB5Zew41fZnC4MbJybZNWY3fZDYUXQMxbpg1C671Bv3gjES3";
+  "zduGBvNxvEtUDPuPpDNmFKBHmP2B6MUGYiHt9uQwZcTWpbU1R7YzMrCCZm";
 
 export class IPFSClient extends NetworkClient {
   public async stat(cid: string, options?: Partial<StatOptions>) {
