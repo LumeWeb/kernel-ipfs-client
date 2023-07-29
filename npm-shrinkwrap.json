@@ -8,7 +8,7 @@
             "name": "@lumeweb/kernel-ipfs-client",
             "version": "0.1.0-develop.15",
             "dependencies": {
-                "@lumeweb/libkernel": "^0.1.0-develop.27",
+                "@lumeweb/libkernel": "^0.1.0-develop.28",
                 "p-defer": "^4.0.0"
             },
             "devDependencies": {
@@ -2037,9 +2037,9 @@
             }
         },
         "node_modules/@lumeweb/libkernel": {
-            "version": "0.1.0-develop.27",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.27.tgz",
-            "integrity": "sha512-XkO16wzr2k1j9CrraVrL5vm5ysY+wJGwfJf9/PAknpLGko8j8Z/TbO5h/Q43iNjYjLlwBL2cGngX8orCZBWVDA==",
+            "version": "0.1.0-develop.33",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.33.tgz",
+            "integrity": "sha512-/vc/DTK3iFjTu0CRlTlm5F/0VCCQa0zihmge/YPP+VHfeLCtMalB2Wo7oN8fe12SK8EoXOCNNSzFcaPPNI/6ww==",
             "dependencies": {
                 "@lumeweb/libweb": "0.2.0-develop.27",
                 "emittery": "^1.0.1",
