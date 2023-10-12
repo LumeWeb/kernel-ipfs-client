@@ -7,8 +7,7 @@ interface AbortableGenerator {
   iterable: () => AsyncIterable<Uint8Array>;
 }
 
-export const MODULE =
-  "zdiQLfg3eWeoaxrvFf7PVJquqrwSMFTUX3oR5qohBoDB8KiFaVdSqQK8Vm";
+export const MODULE = "zrjLXRiNfZ6gdyVcy88fxpLQRMXzam6y3jigbVj43DeEohx";
 
 export class IPFSClient extends NetworkClient {
   public async stat(cid: string, options?: Partial<StatOptions>) {
